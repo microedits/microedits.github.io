@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant - Micro-Edits Results</title>
+    <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">&larr; Back to Gallery</a>
+
+        <div class="project-header">
+            <h1>Restaurant</h1>
+            <p>Footage © <a href="https://cinestudy.org/" style="color: var(--secondary-color);">CineStudy</a>.</p>
+        </div>
+        <div class="comparison-section">
+            <h2>Main Comparison: Rough Cut vs. MicroEdits</h2>
+            <div class="comparison-grid">
+
+    <div class="video-card" id="card-straight">
+        <h3>Rough Cut</h3>
+        <div class="video-wrapper">
+            <video controls preload="metadata">
+                <source src="assets/RestaurantRoughCut/RestaurantRoughCut/RestaurantRoughCut_video_20260813_132245.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="viz-container">
+            <div class="viz-toggle-buttons">
+                <button class="viz-toggle-btn active" data-type="timeline" onclick="toggleViz(this, 'timeline', 'card-straight')">Timeline</button>
+                <button class="viz-toggle-btn" data-type="synchrony" onclick="toggleViz(this, 'synchrony', 'card-straight')">Synchrony</button>
+                <button class="viz-toggle-btn" data-type="both" onclick="toggleViz(this, 'both', 'card-straight')">Both</button>
+                <button class="viz-toggle-btn" data-type="none" onclick="toggleViz(this, 'none', 'card-straight')">Hide</button>
+            </div>
+            <div class="viz-image-container">
+                <img src="assets/RestaurantRoughCut/RestaurantRoughCut/RestaurantRoughCut_viz_20260813_132301.png" alt="Timeline Visualization" class="viz-image viz-timeline">
+                <img src="assets/RestaurantRoughCut/RestaurantRoughCut/RestaurantRoughCut_synchrony_20260813_132301.png" alt="Synchrony Plot" class="viz-image viz-synchrony hidden">
+                <p class="zoom-hint">Click image to zoom</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="video-card highlight" id="card-mixed">
+        <h3>Micro-Edited</h3>
+        <div class="video-wrapper">
+            <video controls preload="metadata">
+                <source src="assets/RestaurantRoughCut/RestaurantRoughCut_MicroEdit/RestaurantRoughCut_MicroEdit_video_20260813_131929.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="viz-container">
+            <div class="viz-toggle-buttons">
+                <button class="viz-toggle-btn active" data-type="timeline" onclick="toggleViz(this, 'timeline', 'card-mixed')">Timeline</button>
+                <button class="viz-toggle-btn" data-type="synchrony" onclick="toggleViz(this, 'synchrony', 'card-mixed')">Synchrony</button>
+                <button class="viz-toggle-btn" data-type="both" onclick="toggleViz(this, 'both', 'card-mixed')">Both</button>
+                <button class="viz-toggle-btn" data-type="none" onclick="toggleViz(this, 'none', 'card-mixed')">Hide</button>
+            </div>
+            <div class="viz-image-container">
+                <img src="assets/RestaurantRoughCut/RestaurantRoughCut_MicroEdit/RestaurantRoughCut_MicroEdit_viz_20260813_131948.png" alt="Timeline Visualization" class="viz-image viz-timeline">
+                <img src="assets/RestaurantRoughCut/RestaurantRoughCut_MicroEdit/RestaurantRoughCut_MicroEdit_synchrony_20260813_131948.png" alt="Synchrony Plot" class="viz-image viz-synchrony hidden">
+                <p class="zoom-hint">Click image to zoom</p>
+            </div>
+        </div>
+    </div>
+            </div>
+        </div>
+        <p style="text-align: center; color: var(--text-muted);">Two variations: Rough Cut and Micro-Edited. More variations coming.</p>
+    </div>
+
+    <footer>
+        <p><a href="index.html">Back to Gallery</a> | Micro-Edits · UIST 2026</p>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" alt="Enlarged visualization">
+        <div class="lightbox-hint">Click outside or press ESC to close</div>
+    </div>
+
+    <script>
+
+function toggleViz(button, type, cardId) {
+    const card = document.getElementById(cardId);
+    const vizImg = card.querySelector('.viz-timeline');
+    const syncImg = card.querySelector('.viz-synchrony');
+    const buttons = card.querySelectorAll('.viz-toggle-btn');
+
+    buttons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+
+    if (type === 'timeline') {
+        if (vizImg) vizImg.classList.remove('hidden');
+        if (syncImg) syncImg.classList.add('hidden');
+    } else if (type === 'synchrony') {
+        if (vizImg) vizImg.classList.add('hidden');
+        if (syncImg) syncImg.classList.remove('hidden');
+    } else if (type === 'both') {
+        if (vizImg) vizImg.classList.remove('hidden');
+        if (syncImg) syncImg.classList.remove('hidden');
+    } else {
+        if (vizImg) vizImg.classList.add('hidden');
+        if (syncImg) syncImg.classList.add('hidden');
+    }
+}
+
+// Lightbox functionality
+function openLightbox(imgSrc) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.src = imgSrc;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Initialize all cards to show timeline by default
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize timeline buttons
+    document.querySelectorAll('.video-card').forEach(card => {
+        const timelineBtn = card.querySelector('.viz-toggle-btn[data-type="timeline"]');
+        if (timelineBtn) {
+            timelineBtn.click();
+        }
+    });
+
+    // Add click listeners to viz images
+    document.querySelectorAll('.viz-image').forEach(img => {
+        img.addEventListener('click', function() {
+            openLightbox(this.src);
+        });
+        img.title = 'Click to enlarge';
+    });
+
+    // Close lightbox on click outside image
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox) {
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === this || e.target.classList.contains('lightbox-close')) {
+                closeLightbox();
+            }
+        });
+    }
+
+    // Close lightbox on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeLightbox();
+        }
+    });
+});
+
+    </script>
+  <!-- Default Statcounter code for MicroEdits http://microedits.github.io/ -->
+  <script type="text/javascript">
+  var sc_project=13355166;
+  var sc_invisible=1;
+  var sc_security="e658d123";
+  </script>
+  <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+  <noscript><div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/13355166/0/e658d123/1/" alt="Web Analytics" referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+  <!-- End of Statcounter Code -->
+</body>
+</html>
