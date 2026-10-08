@@ -48,6 +48,7 @@ h1 { margin: 0 0 12px; font-size: calc(1rem + 0.9vw); line-height: 1.2; font-wei
   background: #f3f4f6; color: #555; font-size: 14px; font-weight: 600; white-space: nowrap;
 }
 .pill.award { border-color: #f4dc8f; background: #fffbeb; color: #a65309; }
+.award-icon { width: 1.15em; height: 1.15em; margin-right: 5px; vertical-align: -0.2em; color: #e08a00; }
 .authors { display: flex; justify-content: center; flex-wrap: wrap; column-gap: 14px; row-gap: 5px; margin: 0; font-size: calc(0.8rem + 0.2vw); }
 .authors > span, .authors a { color: var(--pink); }
 .authors a:hover { color: #b02a62; text-decoration: underline; }
